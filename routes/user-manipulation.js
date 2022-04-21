@@ -108,5 +108,143 @@ router.delete('/remove', async (req, res)=>{
 
 })
 
+// get the current user data based on the session token id information
+router.get('/current', async (req, res)=>{
+
+    //console.log(req.body);
+
+    const receivedToken = await jwt.verifyToken(req.cookies.access_token);
+    console.log(receivedToken);
+    const currentUserId = receivedToken.id;
+    console.log(currentUserId);
+
+    if(currentUserId){
+
+
+        try{
+            const currentUser = await db.query(queryStrings.getUserById, [currentUserId]);
+            console.log(currentUser);
+
+            res.status(200);
+            res.type('application/json');
+            res.json(currentUser[0]);
+
+            return;
+
+        }catch(err){
+            console.log(err)
+
+            res.status(409);
+            res.type('application/json');
+            res.send(`{"error": "something went wrong"}`);
+            
+            return;
+        }
+
+
+
+
+    }else{
+        res.status(400);
+        res.send();
+        return;
+    }
+
+})
+
+// remove the user based on the session token id information
+router.delete('/remove', async (req, res)=>{
+
+    console.log(req.body);
+
+    const receivedToken = await jwt.verifyToken(req.cookies.access_token);
+    console.log(receivedToken);
+    const currentUserId = receivedToken.id;
+    console.log(currentUserId);
+
+    if(currentUserId){
+
+
+        try{
+            const removedUser = await db.query(queryStrings.deleteUserById, [currentUserId]);
+            console.log(removedUser);
+
+            res.status(200);
+            res.type('application/json');
+            res.json(removedUser[0]);
+
+            return;
+
+        }catch(err){
+            console.log(err)
+
+            res.status(409);
+            res.type('application/json');
+            res.send(`{"error": "something went wrong"}`);
+            
+            return;
+        }
+
+
+
+
+    }else{
+        res.status(400);
+        res.send();
+        return;
+    }
+
+})
+
+// update the current user data based on the session token id and the request body data
+//request keys must match the db desired columns
+router.put('/current', async (req, res)=>{
+
+    const receivedToken = await jwt.verifyToken(req.cookies.access_token);
+    //console.log(receivedToken);
+    const currentUserId = receivedToken.id;
+    //console.log(currentUserId);
+
+    const newData = req.body;
+    //console.log(req.body);
+
+    if(newData){
+
+
+        try{
+
+            const updateValues = queryStrings.updateData(newData, currentUserId);
+            //console.log(updateValues);
+
+            const currentUser = await db.query(updateValues.queryString, updateValues.values);
+            console.log(currentUser);
+
+            res.status(200);
+            res.type('application/json');
+            res.json(currentUser[0]);
+
+            return;
+
+        }catch(err){
+            console.log(err)
+
+            res.status(409);
+            res.type('application/json');
+            res.send(`{"error": "something went wrong"}`);
+            
+            return;
+        }
+
+
+
+
+    }else{
+        res.status(400);
+        res.send();
+        return;
+    }
+
+})
+
 
 module.exports = router;
