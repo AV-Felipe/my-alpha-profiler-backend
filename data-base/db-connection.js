@@ -1,23 +1,26 @@
+require("dotenv").config();
 const { Pool } = require("pg");
 
 // Programmatically setting the connection information in a client object
 // (in a real world scenario, these values could passed using environment variables
 //so they are not exposed in code)
+
 const pool = new Pool({
-  user: "membro",
-  host: "20.197.184.138",
-  database: "my_alpha_profiler_db",
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
   max: 10,
   idleTimeoutMillis: 10000,
   connectionTimeoutMillis: 10000,
-  password: "Where12",
-  port: 5432,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
+
 // Provides a more debugable connection method
 async function getClient() {
   try {
     const client = await pool.connect();
-
+    console.log("Connect");
     // store the original form for the methods we are going to patch
     const query = client.query;
     const release = client.release;

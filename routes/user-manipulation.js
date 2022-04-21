@@ -23,7 +23,6 @@ router.post('/create', async (req, res)=>{
     console.log(req.body);
 
     user.insert(req.body, res);
-
 })
 
 
