@@ -4,16 +4,15 @@ const { Pool } = require("pg");
 // (in a real world scenario, these values could passed using environment variables
 //so they are not exposed in code)
 const pool = new Pool({
-  user: "postgres",
-  host: "192.168.0.105",
+  user: "membro",
+  host: "20.197.184.138",
   database: "my_alpha_profiler_db",
   max: 10,
   idleTimeoutMillis: 10000,
   connectionTimeoutMillis: 10000,
-  password: "",
+  password: "Where12",
   port: 5432,
 });
-
 // Provides a more debugable connection method
 async function getClient() {
   try {
