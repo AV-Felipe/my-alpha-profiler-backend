@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 	password VARCHAR (60) NOT NULL,
 	email VARCHAR (255) NOT NULL,
 	birthdate DATE NOT NULL,
-	user_image VARCHAR (255),
+	user_image TEXT,
 	created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 	updated_at TIMESTAMP WITH TIME ZONE,
 	deleted_at BIGINT DEFAULT 0,
