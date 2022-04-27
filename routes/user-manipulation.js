@@ -20,9 +20,10 @@ router.get('/', async (req, res)=>{
 // create a new user returning its id
 router.post('/create', async (req, res)=>{
 
-    console.log(req.body);
-
-    user.insert(req.body, res);
+    if(await user.validate(req.body, res)){
+        console.log("ok");
+        user.insert(req.body, res);
+    }
 
 })
 
