@@ -45,7 +45,7 @@ const user = {
         }
     },
 
-    async validate(body, res) {
+    validate(body, res) {
 
         const {username, password, email, birthdate} = body;
 
@@ -55,8 +55,6 @@ const user = {
             if(regex.test(password)){
                 console.log("Valid Password")
             }else{
-                res.status(400);
-                res.send('Invalid Password');
                 return false;
             }
 
@@ -65,8 +63,6 @@ const user = {
             if(regex.test(email)){
                 console.log("Valid Email")
             }else{
-                res.status(400);
-                res.send('Invalid Email');
                 return false;
             }
             
@@ -75,18 +71,11 @@ const user = {
             if(regex.test(birthdate)){
                 console.log("Valid Data")
             }else{
-                res.status(400);
-                res.send('Invalid Date');
                 return false;
             }
-
-            res.status(200);
-            res.send();
             return true;
     
         }else{
-            res.status(400);
-            res.send();
                 return false;
         }
     },
