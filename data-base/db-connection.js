@@ -12,7 +12,7 @@ const pool = new Pool({
   max: 10,
   idleTimeoutMillis: 10000,
   connectionTimeoutMillis: 10000,
-  password: "LndpLndpLndp123",
+  password: "random",
   port: 5432,
 });
 
