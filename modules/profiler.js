@@ -17,7 +17,6 @@ const user = {
     
             try{
                 const newUserId = await db.query(queryStrings.insertNewUser, [username, hashedPassword, email, birthdate]);
-                console.log(newUserId);
     
                 const newToken = await jwt.generateToken(newUserId[0])
     
@@ -89,7 +88,6 @@ const user = {
 
             try{
                 const removedUser = await db.query(queryStrings.deleteUserById, [currentUserId]);
-                console.log(removedUser);
 
                 res.status(200);
                 res.type('application/json');
@@ -126,7 +124,6 @@ const user = {
 
             try{
                 const currentUser = await db.query(queryStrings.getUserById, [currentUserId]);
-                console.log(currentUser);
 
                 res.status(200);
                 res.type('application/json');
@@ -168,7 +165,6 @@ const user = {
                 //console.log(updateValues);
 
                 const currentUser = await db.query(updateValues.queryString, updateValues.values);
-                console.log(currentUser);
 
                 res.status(200);
                 res.type('application/json');

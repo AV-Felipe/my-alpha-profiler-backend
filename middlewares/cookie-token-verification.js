@@ -9,8 +9,6 @@ async function cookieValidation(req, res, next){
 
     // Only allow requests to login or user creation endpoints without token
     if(!receivedToken && (requestedRoute != '/session/login' && requestedRoute != '/user/create')){
-        console.log(requestedRoute);
-        console.log(receivedToken);
         return res.sendStatus(403);
     }else if(requestedRoute === '/session/login' || requestedRoute === '/user/create'){
         return next();
@@ -18,7 +16,6 @@ async function cookieValidation(req, res, next){
 
     try{
         const tokenData = await jwt.verifyToken(receivedToken);
-        console.log(tokenData);
         return next();
     }catch(e){
         console.log(e)

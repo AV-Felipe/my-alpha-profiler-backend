@@ -6,14 +6,14 @@ const { Pool } = require("pg");
 //so they are not exposed in code)
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
+  user: "postgres",
+  host: "localhost",
+  database: "my_alpha_profiler_db",
   max: 10,
   idleTimeoutMillis: 10000,
   connectionTimeoutMillis: 10000,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  password: "LndpLndpLndp123",
+  port: 5432,
 });
 
 // Provides a more debugable connection method

@@ -14,7 +14,6 @@ const jwt = require('../modules/jwt-module.js');
 
 // Verifies provided email and password against db an returns a session cookie if ok
 router.post('/login', async (req, res)=>{
-    console.log(req.body);
     
     const {email, password} = req.body; // destructuring the object
 
@@ -24,7 +23,6 @@ router.post('/login', async (req, res)=>{
 
             let data = await db.query(queryStrings.getUserFullData, [email]);
             data = data[0];
-            console.log(data);
 
             const passwordMatch = await bcrypt.checkPassword(password, data.password);
             console.log(passwordMatch);
