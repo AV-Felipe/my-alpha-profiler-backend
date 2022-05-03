@@ -54,6 +54,9 @@ const user = {
             if(regex.test(password)){
                 console.log("Valid Password")
             }else{
+                res.status(400);
+                res.type('application/json');
+                res.send(`{"error": "Invalid Password"}`);
                 return false;
             }
 
@@ -62,19 +65,28 @@ const user = {
             if(regex.test(email)){
                 console.log("Valid Email")
             }else{
+                res.status(400);
+                res.type('application/json');
+                res.send(`{"error": "Invalid Email"}`);
                 return false;
             }
             
             regex = /^(?:(?:1[6-9]|[2-9]\d)?\d{2})(?:(?:(\/|-|\.)(?:0?[13578]|1[02])\1(?:31))|(?:(\/|-|\.)(?:0?[13-9]|1[0-2])\2(?:29|30)))$|^(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(\/|-|\.)0?2\3(?:29)$|^(?:(?:1[6-9]|[2-9]\d)?\d{2})(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:0?[1-9]|1\d|2[0-8])$/;
     
             if(regex.test(birthdate)){
-                console.log("Valid Data")
+                console.log("Valid Date")
             }else{
+                res.status(400);
+                res.type('application/json');
+                res.send(`{"error": "Invalid Date"}`);
                 return false;
             }
             return true;
     
         }else{
+                res.status(400);
+                res.type('application/json');
+                res.send(`{"error": "Missing Data"}`);
                 return false;
         }
     },
@@ -128,7 +140,6 @@ const user = {
                 res.status(200);
                 res.type('application/json');
                 res.json(currentUser[0]);
-
                 return;
 
             }catch(err){
